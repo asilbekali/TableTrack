@@ -35,6 +35,7 @@ export class CategoryController {
     return this.categoryService.create(createCategoryDto);
   }
 
+  @UseGuards(AuthGuard)
   @Get()
   @ApiQuery({ name: 'page', required: false, type: Number })
   @ApiQuery({ name: 'limit', required: false, type: Number })
@@ -50,19 +51,29 @@ export class CategoryController {
     return this.categoryService.findAll({ page, limit, name, restaurantId });
   }
 
+  @RoleDec(Role.ADMIN, Role.OWNER)
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Category details' })
   findOne(@Param('id') id: string) {
     return this.categoryService.findOne(+id);
   }
 
+  @RoleDec(Role.ADMIN, Role.OWNER)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Patch(':id')
   @ApiBody({ type: UpdateCategoryDto })
   @ApiResponse({ status: 200, description: 'Category updated successfully' })
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCategoryDto: UpdateCategoryDto,
+  ) {
     return this.categoryService.update(+id, updateCategoryDto);
   }
 
+  @RoleDec(Role.ADMIN, Role.OWNER)
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard)
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'Category deleted successfully' })
   remove(@Param('id') id: string) {
