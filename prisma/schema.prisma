@@ -1,15 +1,158 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum DebtStatus {
+  PENDING
+  PAID
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  SUPERADMIN
+  CASHER
+  WAITER
+}
+
+enum OrderStatus {
+  PENDING
+  DEBTED
+  PAYED
+}
+
+model Region {
+  id        Int      @id @default(autoincrement())
+  name      String
+  users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Restaurant {
+  id         Int            @id @default(autoincrement())
+  name       String
+  address    String
+  phone      String
+  tip        Float
+  inActive   Boolean        @default(false)
+  users      User[]
+  categories Category[]
+  products   Product[]
+  orders     Order[]
+  debts      Debt[]
+  withdraws  Withdraw[]
+  salaries   WaiterSalary[]
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  name         String
+  password     String
+  role         Role
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  region       Region?    @relation(fields: [regionId], references: [id])
+  regionId     Int?
+  waiterOrders Order[]    @relation("WaiterOrders")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Category {
+  id           Int        @id @default(autoincrement())
+  name         String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  products     Product[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Product {
+  id           Int         @id @default(autoincrement())
+  name         String
+  price        Float
+  inActive     Boolean     @default(false)
+  category     Category    @relation(fields: [categoryId], references: [id])
+  categoryId   Int
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  OrderItem    OrderItem[]
+}
+
+// order 
+
+model Order {
+  id           Int           @id @default(autoincrement())
+  table        String
+  status       OrderStatus
+  restaurant   Restaurant    @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  waiter       User          @relation("WaiterOrders", fields: [waiterId], references: [id])
+  waiterId     Int
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  salary       WaiterSalary?
+  debt         Debt?
+
+  orderItems OrderItem[] @relation("OrderOrderItems")
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  createdAt DateTime @default(now())
+
+  orderId Int
+  order   Order @relation("OrderOrderItems", fields: [orderId], references: [id])
+}
+
+// order 
+
+model Debt {
+  id           Int        @id @default(autoincrement())
+  client       String
+  amount       Float
+  orderId      Int        @unique
+  order        Order      @relation(fields: [orderId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  status       DebtStatus
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Withdraw {
+  id           Int        @id @default(autoincrement())
+  amount       Float
+  inCome       Float?
+  outCome      Float?
+  note         String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model WaiterSalary {
+  id           Int        @id @default(autoincrement())
+  amount       Float
+  order        Order      @relation(fields: [orderId], references: [id])
+  orderId      Int        @unique
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
