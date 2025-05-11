@@ -32,7 +32,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   SwaggerModule.setup('menu', app, documentFactory);
 
-  const port = 3000;
+  const port = 4000;
   await app.listen(port);
   console.log(`server is running on http://localhost:${port}`);
 }
