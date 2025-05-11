@@ -19,9 +19,7 @@ export class AuthGuard implements CanActivate {
     try {
       let data = this.jwt.verify(token);
       req['user'] = data;
-
-      console.log(data.role);
-
+      
       return true;
     } catch (error) {
       throw new UnauthorizedException('Token not valid !');
