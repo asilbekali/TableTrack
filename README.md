@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-# 🍴 Restaurant Management System 🚀  
-A comprehensive **Restaurant Management System** built to streamline internal processes, from order management to payment tracking.  
-
----
-
-## 📋 Features  
-- 🛒 **Order Management**: Log and manage customer orders efficiently.  
-- 💵 **Cashier Tools**: Simplify financial operations.  
-- 🧑‍🍳 **Waitstaff Support**: Easily handle customer requests and ensure seamless service.  
-- 🔐 **Secure Access**: Includes **JWT-based authentication** and **authorization** for role management.  
-
----
-
-## 🛠️ Technologies Used  
-- **NestJS**: Backend framework for building robust and scalable applications.  
-- **PostgreSQL**: Reliable database management system for structured data.  
-- **Prisma**: Modern ORM for managing database interactions.  
-- **JWT**: Secure authentication and authorization mechanism.  
-
----
-
-## 💡 Why Choose This System?  
-This application is ideal for restaurants looking to digitize operations and improve efficiency while ensuring data security and scalability.  
-
----
-
-## 🚀 Getting Started  
-Follow these steps to run the project locally:  
-
-1. Clone the repository:  
-   ```bash
-   git clone https://github.com/asilbekali/TableTrack.git
-   cd restaurant-management-system
-=======
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
@@ -63,33 +28,33 @@ Follow these steps to run the project locally:
 ## Project setup
 
 ```bash
-$ yarn install
+$ npm install
 ```
 
 ## Compile and run the project
 
 ```bash
 # development
-$ yarn run start
+$ npm run start
 
 # watch mode
-$ yarn run start:dev
+$ npm run start:dev
 
 # production mode
-$ yarn run start:prod
+$ npm run start:prod
 ```
 
 ## Run tests
 
 ```bash
 # unit tests
-$ yarn run test
+$ npm run test
 
 # e2e tests
-$ yarn run test:e2e
+$ npm run test:e2e
 
 # test coverage
-$ yarn run test:cov
+$ npm run test:cov
 ```
 
 ## Deployment
@@ -99,7 +64,7 @@ When you're ready to deploy your NestJS application to production, there are som
 If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
 ```bash
-$ yarn install -g @nestjs/mau
+$ npm install -g @nestjs/mau
 $ mau deploy
 ```
 
@@ -131,4 +96,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
->>>>>>> f5aaa05 (add project repository)
