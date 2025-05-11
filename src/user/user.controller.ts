@@ -26,7 +26,7 @@ export class UserController {
       example1: {
         summary: 'Create a user example',
         value: {
-          name: 'John Doe',
+          name: '',
           password: 'securepassword',
           role: 'admin',
           restaurantId: 1,
