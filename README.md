@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🍴 Restaurant Management System 🚀  
 A comprehensive **Restaurant Management System** built to streamline internal processes, from order management to payment tracking.  
 
@@ -32,7 +32,9 @@ Follow these steps to run the project locally:
    ```bash
    git clone https://github.com/asilbekali/TableTrack.git
    cd restaurant-management-system
-=======
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
