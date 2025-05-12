@@ -25,7 +25,7 @@ import { RoleDec } from 'src/Decorators/roles.decorator';
 import { Role } from 'src/user/enum/role.enum';
 import { RolesGuard } from 'src/Guards/roles.guard';
 
-@ApiTags('Product') // Swagger uchun tag
+@ApiTags('Product') 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
